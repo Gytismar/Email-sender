@@ -11,13 +11,13 @@ pip install requires.io
 ```
 
 ## Kaip veikia ir ko reikia
-Naudoja python automatiškai siųsti laiškus naudojantis CSV failus skaityti duomenims
+Naudoja python automatiškai siųsti laiškus
 
 Laišką reikia turėti HTML formatu "Email HTML.txt" faile
 
-Rinkodaros komandos ir jos paštą reikia laikyti "Kompanijos.csv" faile, kompanijų skaičius neribojamas, tačiau patartina per daug nesiųsti, nes gali išsiųsti laiškai patekti į spam (PRADEDAMA SKAITYTI NUO ANTROS EILUTĖS)
+Kompanijos pavadinimą ir jos paštą reikia laikyti "Kompanijos.csv" faile, kompanijų skaičius neribojamas, tačiau patartina per daug vienu metu nesiųsti, nes gali išsiųsti laiškai patekti į spam (PRADEDAMA SKAITYTI NUO ANTROS EILUTĖS)
 
-Koreguoti Config.csv failą pagal savo reikmenis
+Koreguoti Config.csv failą pagal savo duomenis
 
 ## Config faile:
 1. Prisjungimas

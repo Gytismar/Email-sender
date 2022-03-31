@@ -1,8 +1,7 @@
 # Email-sender
 Automatiškas laiškų siuntimas
 
-#Sukurta https://github.com/Gytismar
-#Bet kokias klausimais rašykite gytismar@gmail.com
+Sukurta https://github.com/Gytismar, bet kokias klausimais rašykite gytismar@gmail.com
 
 Naudoja python automatiškai siųsti laiškus naudojantis CSV failą skaityti duomenims
 

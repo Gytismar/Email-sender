@@ -3,6 +3,7 @@ Automatiškas laiškų siuntimas
 
 ## Kontaktai
 Sukurta https://github.com/Gytismar
+
 Bet kokias klausimais rašykite gytismar@gmail.com
 
 ## Instaliavimas

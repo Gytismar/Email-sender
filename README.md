@@ -7,7 +7,7 @@ Sukurta https://github.com/Gytismar, bet kokias klausimais rašykite gytismar@gm
 ## Instaliavimas
 ```
 pip install secure-smtplib
-pip install secure-smtplib
+pip install requires.io
 ```
 
 ## Kaip veikia ir ko reikia

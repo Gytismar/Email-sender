@@ -10,7 +10,7 @@ pip install secure-smtplib
 pip install requires.io
 ```
 
-## Kaip veikia ir ko reikia
+## Naudojimas
 Naudoja python automatiškai siųsti laiškus
 
 Laišką reikia turėti HTML formatu "Email HTML.txt" faile
@@ -19,7 +19,7 @@ Kompanijos pavadinimą ir jos paštą reikia laikyti "Kompanijos.csv" faile, kom
 
 Koreguoti Config.csv failą pagal savo duomenis
 
-## Config faile:
+## Config failas:
 1. Prisjungimas
 2. Slaptažodis pašto
 3. Laiško tema

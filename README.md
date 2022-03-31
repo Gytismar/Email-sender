@@ -2,7 +2,8 @@
 Automatiškas laiškų siuntimas
 
 ## Kontaktai
-Sukurta https://github.com/Gytismar, bet kokias klausimais rašykite gytismar@gmail.com
+Sukurta https://github.com/Gytismar
+Bet kokias klausimais rašykite gytismar@gmail.com
 
 ## Instaliavimas
 ```

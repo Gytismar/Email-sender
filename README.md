@@ -10,7 +10,7 @@ pip install secure-smtplib
 pip install secure-smtplib
 ```
 
-##Kaip veikia ir ko reikia
+## Kaip veikia ir ko reikia
 Naudoja python automatiškai siųsti laiškus naudojantis CSV failus skaityti duomenims
 
 Laišką reikia turėti HTML formatu "Email HTML.txt" faile

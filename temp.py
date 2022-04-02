@@ -91,9 +91,9 @@ class TableWidget(QWidget):
                 self.tableWidget.setItem(i, 1, QTableWidgetItem(data[i][1]))
                 
 
-                
+
 
 if __name__ == '__main__':
         app = QApplication(sys.argv)
         ex=App()
-        sys.exit(app.exec_())
+        sys.exit(app.exec_())   

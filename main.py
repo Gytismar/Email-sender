@@ -1,16 +1,17 @@
-from fileinput import filename
-from PyQt5.QtWidgets import (QApplication,QWidget,QHBoxLayout,QPushButton,QGridLayout, QVBoxLayout, QTabWidget, QPlainTextEdit, QTableWidget, QFileDialog, QTableWidgetItem)
+from PyQt5.QtWidgets import (QApplication,QWidget,QHBoxLayout,QPushButton,QGridLayout, QLabel,QVBoxLayout, QTabWidget, QPlainTextEdit, QTableWidget, QFileDialog, QTableWidgetItem)
 from PyQt5.QtCore import pyqtSlot, QDir
 from PyQt5 import QtGui, Qt 
 import sys
 import os
 import csv
+import json
 
-
-
+f = open('config.json')
+data = json.load(f)
+f.close()
 
 class App(QWidget):
-      def __init__(self):
+        def __init__(self):
                 super().__init__()
                 screen_rect = app.desktop().screenGeometry()
 
@@ -22,23 +23,134 @@ class App(QWidget):
 
 
                 self.table_widget = TableWidget(self)
-                self.browseFiles = QPushButton("--")
+               
+
+                self.usless = QLabel(' ', self)
+                self.txtLabel = QLabel('Txt file:', self)
+                self.txtDirLabel = QLabel(" ", self)
+                self.csvLabel = QLabel('Csv file:', self)
+                self.csvDirLabel = QLabel(" ", self)
+
+
+                self.txtLoad = QPushButton(self)
+                self.txtLoad.setText("Load file")
+                self.txtLoad.clicked.connect(self.getTextData)
+                self.txtLoad.setFixedWidth(60)
+                
+                self.csvLoad = QPushButton(self)
+                self.csvLoad.setText("Load file")
+                self.csvLoad.clicked.connect(self.getTableData)
+                self.csvLoad.setFixedWidth(60)
+
+                self.layout2 = QGridLayout()
+
+                self.layout2.addWidget(self.usless, 0, 0, 10, 1)
+                self.layout2.addWidget(self.txtLabel, 1, 0, 1, 1)
+                self.layout2.addWidget(self.txtLoad, 1, 1, 1, 1)
+                self.layout2.addWidget(self.txtDirLabel, 2, 0, 1, 1)
+
+                self.layout2.addWidget(self.csvLabel, 3, 0, 1, 1)
+                self.layout2.addWidget(self.csvLoad, 3, 1, 1, 1)
+                self.layout2.addWidget(self.csvDirLabel, 4, 0, 1, 1)
+                self.layout2.addWidget(self.usless, 5, 0, 10, 1)
+
+        
+                
+                self.layout2.addWidget(QLabel("Log in "), 6,0, 1, 1)
+                self.layout2.addWidget(QLabel(data["Prisijungimas"]), 6,1, 1, 1)
+                
+                self.layout2.addWidget(QLabel("Password"), 7,0, 1, 1)
+                self.layout2.addWidget(QLabel(data["Slaptazodis"]), 7,1, 1, 1)
+        
+                self.layout2.addWidget(QLabel("Email theme"), 8,0, 1, 1)
+                self.layout2.addWidget(QLabel(data["Theme"]), 8,1, 1, 1)
+        
+                self.layout2.addWidget(QLabel("Attachment"), 9,0, 1, 1)
+                self.layout2.addWidget(QLabel(data["Attachment"]), 9,1, 1, 1)
+        
+                self.layout2.addWidget(QLabel("Port"), 10,0, 1, 1)
+                self.layout2.addWidget(QLabel(str(data["Port"])), 10,1, 1, 1)
+        
+                self.layout2.addWidget(QLabel("SMTP"), 11,0, 1, 1)
+                self.layout2.addWidget(QLabel(str(data["SMTP"])), 11,1, 1, 1)
+        
+                self.sendButton = QPushButton(self)
+                self.sendButton.setText("Yeet it")
+                self.sendButton.clicked.connect(self.sendScript)
+                self.sendButton.setFixedWidth(200)
+
+                self.layout2.addWidget(self.sendButton, 12, 0,1,10)
 
                 layout = QHBoxLayout()
-                layout.addWidget(self.table_widget, 2)
-                layout.addWidget(self.browseFiles, 1)
-                layout.addWidget(QPushButton(":DD"))
+                layout.addWidget(self.table_widget,2)
+                layout.addLayout(self.layout2, 1)
+                
                 self.setLayout(layout)
 
                 self.initUI()
-      def initUI(self):
+        def initUI(self):
                 self.setMinimumSize(self.width,self.height)
                 self.setWindowTitle(self.title)
                 self.setGeometry(self.left,self.top,self.width,self.height)
                 self.show()
+        
+        def sendScript():
+                exec(open("./Script.py").read())
 
-      
-      
+        def getTextData(self):
+                self.table_widget.textBox.clear()
+                self.fileDir = QFileDialog.getOpenFileName(self, 'Single File', os.getcwd() , '*.txt')
+                if self.fileDir[0] != '':
+
+                        #open text file in read mode
+                        self.txtDir = os.path.basename(self.fileDir[0])
+
+                        temp = {"txtDir": self.fileDir[0]}
+                        updateConfig(temp)
+                        
+                        self.txtDirLabel.setText(self.txtDir)
+                        basename_without_ext = os.path.splitext(self.txtDir)[0]
+                        self.table_widget.tabs.setTabText(0,basename_without_ext)
+
+                        temp = self.txtDirLabel.font()
+                        temp.setItalic(True)
+                        self.txtDirLabel.setFont(temp)
+
+                        text_file = open(self.fileDir[0], "r")
+
+                        #read whole file to a string
+                        data = text_file.read()
+                        self.table_widget.textBox.insertPlainText(data)
+                        #close file
+                        text_file.close()
+        
+        def getTableData(self):
+                self.table_widget.tableWidget.clear()
+                self.fileDir = QFileDialog.getOpenFileName(self, 'Single File', os.getcwd() , '*.csv')
+                if self.fileDir[0] != '':
+                        dir = self.fileDir[0]
+                        basename_without_ext = os.path.splitext(os.path.basename(dir))[0]
+                        temp = {"csvDir": self.fileDir[0]}
+                        updateConfig(temp)
+                        self.csvDir = os.path.basename(self.fileDir[0])
+                        self.csvDirLabel.setText(self.csvDir)
+
+                        temp = self.csvDirLabel.font()
+                        temp.setItalic(True)
+                        self.csvDirLabel.setFont(temp)
+
+                        self.table_widget.tabs.setTabText(1,basename_without_ext)
+                        #does this closes the file? or just leaves it opened :D
+                        data = list(csv.reader(open(dir, encoding='utf-8')))
+                        
+                        rowcount = 0
+                        for row in open(dir):
+                            rowcount+= 1
+
+                        self.table_widget.tableWidget.setRowCount(rowcount+2)
+                        for i in range(0,rowcount): 
+                                self.table_widget.tableWidget.setItem(i, 0, QTableWidgetItem(data[i][0]))
+                                self.table_widget.tableWidget.setItem(i, 1, QTableWidgetItem(data[i][1]))
 
 class TableWidget(QWidget):
     
@@ -63,16 +175,10 @@ class TableWidget(QWidget):
     def firstTab(self):
             self.textBox = QPlainTextEdit()
 
-            self.pushButtonLoad = QPushButton(self)
-            self.pushButtonLoad.setText("Load file")
-            self.pushButtonLoad.clicked.connect(self.getTextData)
-            self.pushButtonLoad.setFixedWidth(60)
-
-
+        
             self.tab1.layout = QGridLayout(self)
             self.tab1.layout.setSpacing(1)
             self.tab1.layout.setContentsMargins(0, 0,0, 0)
-            self.tab1.layout.addWidget(self.pushButtonLoad, 0,0)
             self.tab1.layout.addWidget(self.textBox, 1, 0, 1, 10)
             self.tab1.setLayout(self.tab1.layout)
 
@@ -82,53 +188,19 @@ class TableWidget(QWidget):
             self.tableWidget.setColumnCount(100)
             self.tableWidget.setShowGrid(True)
 
-            self.pushButtonLoad = QPushButton(self)
-            self.pushButtonLoad.setText("Load file")
-            self.pushButtonLoad.clicked.connect(self.getTableData)
-            self.pushButtonLoad.setFixedWidth(60)
-
-
+            
             self.tab2.layout = QGridLayout(self)
-            self.tab2.layout.setSpacing(1)
             self.tab2.layout.setContentsMargins(0, 0,0, 0)
-            self.tab2.layout.addWidget(self.pushButtonLoad, 0, 0)
-            self.tab2.layout.addWidget(self.tableWidget, 1, 0, 1, 10)
+            self.tab2.layout.addWidget(self.tableWidget, 0, 0, 1, 10)
             self.tab2.setLayout(self.tab2.layout)
     
-    def getTableData(self):
-            self.tableWidget.clear()
-            self.fileDir = QFileDialog.getOpenFileName(self, 'Single File', os.getcwd() , '*.csv')
-            if self.fileDir[0] != '':
-                dir = self.fileDir[0]
-                basename_without_ext = os.path.splitext(os.path.basename(dir))[0]
-                print(os.path.basename(dir))
-
-                self.tabs.setTabText(1,basename_without_ext)
-                #does this closes the file? or just leaves it opened :D
-                data = list(csv.reader(open(dir, encoding='utf-8')))
-                
-                rowcount = 0
-                for row in open(dir):
-                    rowcount+= 1
-
-                self.tableWidget.setRowCount(rowcount+2)
-                for i in range(0,rowcount): 
-                    self.tableWidget.setItem(i, 0, QTableWidgetItem(data[i][0]))
-                    self.tableWidget.setItem(i, 1, QTableWidgetItem(data[i][1]))
+    
    
-    def getTextData(self):
-        self.textBox.clear()
-        self.fileDir = QFileDialog.getOpenFileName(self, 'Single File', os.getcwd() , '*.txt')
-        if self.fileDir[0] != '':
-            #open text file in read mode
-            text_file = open(self.fileDir[0], "r")
-        
-            #read whole file to a string
-            data = text_file.read()
-            self.textBox.insertPlainText(data)
-            #close file
-            text_file.close()
-
+def updateConfig(temp):
+        data.update(temp)
+        with open("config.json", "w") as outfile:
+                json.dump(data, outfile)
+                        
 
 if __name__ == '__main__':
         app = QApplication(sys.argv)

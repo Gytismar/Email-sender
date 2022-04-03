@@ -9,8 +9,13 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 import io
 import csv
+import json
 
-datafile = "Kompanijos.csv" #FAILAS PRADEDAMAS SKAITYTI NUO ANTROS EILUTĖS, komandos pavadinimas ir tada 
+f = open('config.json')
+dataFromJson = json.load(f)
+f.close()
+
+datafile = dataFromJson["csvDir"] #FAILAS PRADEDAMAS SKAITYTI NUO ANTROS EILUTĖS, komandos pavadinimas ir tada 
 data = list(csv.reader(open(datafile, encoding='utf-8')))
 
 infofile = "Config.csv"
@@ -26,11 +31,11 @@ Sender_info = list(csv.reader(open(infofile, encoding='utf-8')))
 # Sender_info[4][1] - port numeris
 # Sender_info[5][1] - SMTP arba EMAIL adresas
 
-sender_email = Sender_info[0][1]
-password = Sender_info[1][1]
-subject = Sender_info[2][1]
-port = Sender_info[4][1]
-SMTPAdress = Sender_info[5][1]
+sender_email = dataFromJson["Prisijungimas"]
+password = dataFromJson["Slaptazodis"]
+subject = dataFromJson["Theme"]
+port = dataFromJson["Port"]
+SMTPAdress = dataFromJson["SMTP"]
 
 rowcount = 0 #eilučių kiekis
 for row in open(datafile):
@@ -44,7 +49,7 @@ for x in range(1,rowcount): #for loop siuntimui laiškų
   msg["Subject"] = subject                       #Laiško pavadinimas
   msg["From"] = sender_email                     #Rodys kas siunčia
   msg["To"] = data[x][1]                         #Kam siunčia
-  filename = Sender_info[3][1]                   #Prisegamas failas
+  filename = dataFromJson["Attachment"]                   #Prisegamas failas
 
   read_file = io.open("Email HTML.txt", "r", encoding = "utf8") #skaitys laišką iš Email HTML.txt (Laiškas būtinai html formatu)
   html = read_file.read()  

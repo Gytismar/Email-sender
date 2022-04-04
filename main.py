@@ -8,7 +8,7 @@ import csv
 import json
 import Script
 
-f = open('config.json')
+f = open('config.json',encoding='utf-8')
 data = json.load(f)
 f.close()
 
@@ -146,7 +146,7 @@ class App(QWidget):
                         temp.setItalic(True)
                         self.txtDirLabel.setFont(temp)
 
-                        text_file = open(self.fileDir[0], "r")
+                        text_file = open(self.fileDir[0], "r", encoding='utf-8')
 
                         #read whole file to a string
                         data = text_file.read()

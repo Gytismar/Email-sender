@@ -3,7 +3,9 @@ Automatiškas laiškų siuntimas
 
 ## Kontaktai
 Autoriai:
+
 https://github.com/Stebis-dev
+
 https://github.com/Gytismar
 
 Bet kokias klausimais rašykite gytismar@gmail.com

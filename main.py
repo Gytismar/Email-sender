@@ -123,7 +123,9 @@ class App(QWidget):
                         self.sendButton.show()
 
         def sendScript(self):
+                self.sendButton.hide()
                 Script.mainScript()
+
 
         def getTextData(self):
                 self.table_widget.textBox.clear()

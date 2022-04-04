@@ -10,6 +10,7 @@ from email.mime.multipart import MIMEMultipart
 import io
 import csv
 import json
+import time
 
 def mainScript():
     f = open('config.json')
@@ -22,6 +23,7 @@ def mainScript():
 
     sender_email = dataFromJson["Prisijungimas"]
     password = dataFromJson["Slaptazodis"]
+    sleeptime = dataFromJson["Sleep"]
     subject = dataFromJson["Theme"]
     port = int(dataFromJson["Port"])
     SMTPAdress = dataFromJson["SMTP"]
@@ -31,6 +33,7 @@ def mainScript():
         rowcount+= 1
 
     for x in range(1,rowcount): #for loop siuntimui laiškų
+        time.sleep(sleeptime)
         receiver_email = data[x][1]
         #Sukuriamas MIMEMultipart objektas
         msg = MIMEMultipart("alternative")

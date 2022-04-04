@@ -65,7 +65,8 @@ class App(QWidget):
                 self.layout2.addWidget(QLabel("Password"), 7,0, 1, 1)
                 self.passwordLineEdit = QLineEdit(data["Slaptazodis"])
                 self.layout2.addWidget(self.passwordLineEdit, 7,1, 1, 1)
-        
+
+
                 self.layout2.addWidget(QLabel("Email theme"), 8,0, 1, 1)
                 self.themeLineEdit = QLineEdit(data["Theme"])
                 self.layout2.addWidget(self.themeLineEdit, 8,1, 1, 1)
@@ -81,7 +82,11 @@ class App(QWidget):
                 self.layout2.addWidget(QLabel("SMTP"), 11,0, 1, 1)
                 self.SMTPLineEdit = QLineEdit(str(data["SMTP"]))
                 self.layout2.addWidget(self.SMTPLineEdit, 11,1, 1, 1)
-        
+
+                self.layout2.addWidget(QLabel("Sleep"), 12,0, 1, 1)
+                self.sleepLineEdit = QLineEdit(data["Sleep"])
+                self.layout2.addWidget(self.sleepLineEdit, 12,1, 1, 1)
+
                 self.saveButton = QPushButton(self)
                 self.saveButton.setText("Save")
                 self.saveButton.clicked.connect(self.saveInfo)
@@ -92,9 +97,9 @@ class App(QWidget):
                 self.sendButton.clicked.connect(self.sendScript)
                 self.sendButton.setFixedWidth(200)
                 self.sendButton.hide()
-                self.layout2.addWidget(self.saveButton, 12, 0,1,10)
+                self.layout2.addWidget(self.saveButton, 13, 0,1,10)
 
-                self.layout2.addWidget(self.sendButton, 13, 0,1,10)
+                self.layout2.addWidget(self.sendButton, 14, 0,1,10)
 
                 layout = QHBoxLayout()
                 layout.addWidget(self.table_widget,2)
@@ -114,6 +119,7 @@ class App(QWidget):
                         temp = {
                                 "Prisijungimas":self.logInLineEdit.text(),
                                 "Slaptazodis":self.passwordLineEdit.text(),
+                                "Sleep": int(self.sleepLineEdit.text()),
                                 "Theme":self.themeLineEdit.text(),
                                 "Attachment":self.attachmentLineEdit.text(),
                                 "Port":self.portLineEdit.text(),
@@ -170,7 +176,6 @@ class App(QWidget):
                         self.csvDirLabel.setFont(temp)
 
                         self.table_widget.tabs.setTabText(1,basename_without_ext)
-                        #does this closes the file? or just leaves it opened :D
                         test = open(dir, encoding='utf-8')
                         data = list(csv.reader(test))
                         test.close()

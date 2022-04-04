@@ -171,8 +171,9 @@ class App(QWidget):
 
                         self.table_widget.tabs.setTabText(1,basename_without_ext)
                         #does this closes the file? or just leaves it opened :D
-                        data = list(csv.reader(open(dir, encoding='utf-8')))
-                        
+                        test = open(dir, encoding='utf-8')
+                        data = list(csv.reader(test))
+                        test.close()
                         rowcount = 0
                         for row in open(dir):
                             rowcount+= 1

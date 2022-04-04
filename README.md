@@ -10,6 +10,7 @@ Bet kokias klausimais rašykite gytismar@gmail.com
 ```
 pip install secure-smtplib
 pip install requires.io
+pip install PyQt5
 ```
 
 ## Naudojimas

@@ -4,7 +4,7 @@
     "Theme": "xxxx",
     "Attachment": "xxxx",
     "Port": "465",
-    "SMTP": "smtp.gmail.cpm",
+    "SMTP": "smtp.gmail.com",
     "txtDir": "C:/Users/Gediminas/OneDrive/Dokumentai/GitHub/Email-sender/Email HTML.txt",
     "csvDir": "C:/Users/Gediminas/OneDrive/Dokumentai/GitHub/Email-sender/Kompanijos.csv"
 }

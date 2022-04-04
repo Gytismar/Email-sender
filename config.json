@@ -1,9 +1,9 @@
 {
-    "Prisijungimas": "XXXX@gmail.com",
-    "Slaptazodis": "XXXX",
-    "Theme": "XXXX",
-    "Attachment": "XXXX",
-    "Port": "XXXX",
+    "Prisijungimas": "xxxx@gmail.com",
+    "Slaptazodis": "xxxx",
+    "Theme": "xxxx",
+    "Attachment": "xxxx",
+    "Port": "465",
     "SMTP": "smtp.gmail.cpm",
     "txtDir": "C:/Users/Gediminas/OneDrive/Dokumentai/GitHub/Email-sender/Email HTML.txt",
     "csvDir": "C:/Users/Gediminas/OneDrive/Dokumentai/GitHub/Email-sender/Kompanijos.csv"

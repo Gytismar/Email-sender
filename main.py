@@ -1,10 +1,12 @@
-from PyQt5.QtWidgets import (QApplication,QWidget,QHBoxLayout,QPushButton,QGridLayout, QLabel,QVBoxLayout, QTabWidget, QPlainTextEdit, QTableWidget, QFileDialog, QTableWidgetItem)
+# from PyQt5.QtWidgets import (QApplication,QWidget,QHBoxLayout,QPushButton,QGridLayout,QLineEdit, QLabel,QVBoxLayout, QTabWidget, QPlainTextEdit, QTableWidget, QFileDialog, QTableWidgetItem)
+from PyQt5.QtWidgets import *
 from PyQt5.QtCore import pyqtSlot, QDir
 from PyQt5 import QtGui, Qt 
 import sys
 import os
 import csv
 import json
+import Script
 
 f = open('config.json')
 data = json.load(f)
@@ -57,29 +59,42 @@ class App(QWidget):
         
                 
                 self.layout2.addWidget(QLabel("Log in "), 6,0, 1, 1)
-                self.layout2.addWidget(QLabel(data["Prisijungimas"]), 6,1, 1, 1)
+                self.logInLineEdit = QLineEdit(data["Prisijungimas"])
+                self.layout2.addWidget(self.logInLineEdit, 6,1, 1, 1)
                 
                 self.layout2.addWidget(QLabel("Password"), 7,0, 1, 1)
-                self.layout2.addWidget(QLabel(data["Slaptazodis"]), 7,1, 1, 1)
+                self.passwordLineEdit = QLineEdit(data["Slaptazodis"])
+                self.layout2.addWidget(self.passwordLineEdit, 7,1, 1, 1)
         
                 self.layout2.addWidget(QLabel("Email theme"), 8,0, 1, 1)
-                self.layout2.addWidget(QLabel(data["Theme"]), 8,1, 1, 1)
+                self.themeLineEdit = QLineEdit(data["Theme"])
+                self.layout2.addWidget(self.themeLineEdit, 8,1, 1, 1)
         
                 self.layout2.addWidget(QLabel("Attachment"), 9,0, 1, 1)
-                self.layout2.addWidget(QLabel(data["Attachment"]), 9,1, 1, 1)
+                self.attachmentLineEdit = QLineEdit(data["Attachment"])
+                self.layout2.addWidget(self.attachmentLineEdit, 9,1, 1, 1)
         
                 self.layout2.addWidget(QLabel("Port"), 10,0, 1, 1)
-                self.layout2.addWidget(QLabel(str(data["Port"])), 10,1, 1, 1)
+                self.portLineEdit = QLineEdit(str(data["Port"]))
+                self.layout2.addWidget(self.portLineEdit, 10,1, 1, 1)
         
                 self.layout2.addWidget(QLabel("SMTP"), 11,0, 1, 1)
-                self.layout2.addWidget(QLabel(str(data["SMTP"])), 11,1, 1, 1)
+                self.SMTPLineEdit = QLineEdit(str(data["SMTP"]))
+                self.layout2.addWidget(self.SMTPLineEdit, 11,1, 1, 1)
         
+                self.saveButton = QPushButton(self)
+                self.saveButton.setText("Save")
+                self.saveButton.clicked.connect(self.saveInfo)
+                self.saveButton.setFixedWidth(60)
+
                 self.sendButton = QPushButton(self)
                 self.sendButton.setText("Yeet it")
                 self.sendButton.clicked.connect(self.sendScript)
                 self.sendButton.setFixedWidth(200)
+                self.sendButton.hide()
+                self.layout2.addWidget(self.saveButton, 12, 0,1,10)
 
-                self.layout2.addWidget(self.sendButton, 12, 0,1,10)
+                self.layout2.addWidget(self.sendButton, 13, 0,1,10)
 
                 layout = QHBoxLayout()
                 layout.addWidget(self.table_widget,2)
@@ -93,9 +108,22 @@ class App(QWidget):
                 self.setWindowTitle(self.title)
                 self.setGeometry(self.left,self.top,self.width,self.height)
                 self.show()
-        
-        def sendScript():
-                exec(open("./Script.py").read())
+
+        def saveInfo(self):
+                if  self.logInLineEdit.text() != "XXXX@gmail.com":
+                        temp = {
+                                "Prisijungimas":self.logInLineEdit.text(),
+                                "Slaptazodis":self.passwordLineEdit.text(),
+                                "Theme":self.themeLineEdit.text(),
+                                "Attachment":self.attachmentLineEdit.text(),
+                                "Port":self.portLineEdit.text(),
+                                "SMTP":self.SMTPLineEdit.text()
+                         }
+                        updateConfig(temp)
+                        self.sendButton.show()
+
+        def sendScript(self):
+                Script.mainScript()
 
         def getTextData(self):
                 self.table_widget.textBox.clear()

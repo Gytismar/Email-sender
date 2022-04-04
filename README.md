@@ -36,7 +36,7 @@ Koreguoti Config.json failą pagal savo duomenis UI laukuose
 7. Laiko tarpas tarp išsiunčiamų laiškų sekundėmis
 
 ## Notes
-Norint siųsti iš tam tikro pašto reikia dažniausiai išjungti 2FA bei leisti siuntimą per SMTP (link į kaip tai padaryti su gmail: (https://stackoverflow.com/questions/10147455/how-to-send-an-email-with-gmail-as-provider-using-python/27515833#27515833)
+Norint siųsti iš tam tikro pašto reikia dažniausiai išjungti 2FA bei leisti siuntimą per SMTP (kaip tai padaryti su gmail: (https://stackoverflow.com/questions/10147455/how-to-send-an-email-with-gmail-as-provider-using-python/27515833#27515833)
 
 Pradinis config failas padarytas siuntimui laiškų per gmail
 

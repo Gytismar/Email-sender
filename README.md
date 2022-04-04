@@ -4,4 +4,4 @@ issues:
 
 no safe mechanism
 
-might be an issue in al later time ( congif.json holds previously used directorys, so if might someone tries to use it wihout choosing new ones, it will work with old ones, and might leave with big consequences)
+might be an issue in a later time ( congif.json holds previously used directorys, so if might someone tries to use it wihout choosing new ones, it will work with old ones, and might leave with big consequences)

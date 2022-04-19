@@ -4,9 +4,9 @@ Automatiškas laiškų siuntimas
 ## Kontaktai
 Autoriai:
 
-https://github.com/Stebis-dev
+*[Stebis-dev](https://github.com/Stebis-dev)
 
-https://github.com/Gytismar
+*[Gytismar](https://github.com/Gytismar)
 
 Bet kokias klausimais rašykite gytismar@gmail.com
 
@@ -40,5 +40,5 @@ Norint siųsti iš tam tikro pašto reikia dažniausiai išjungti 2FA bei leisti
 
 Pradinis config failas padarytas siuntimui laiškų per gmail
 
-## Problemos
+## Problemos/feature
 UI išsaugo prieš tai pasirinktą failus, kurie bus panaudoti nebent bus pasirinkti nauji csv ir json failai.

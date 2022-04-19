@@ -3,8 +3,9 @@ Automatiškas laiškų siuntimas
 
 ## Kontaktai
 Autoriai:
-Markup : * [Stebis-dev](https://github.com/Stebis-dev)
-         * [Gytismar](https://github.com/Gytismar)
+
+ * [Gytismar](https://github.com/Gytismar)
+ * [Stebis-dev](https://github.com/Stebis-dev)
 
 Bet kokias klausimais rašykite gytismar@gmail.com
 
